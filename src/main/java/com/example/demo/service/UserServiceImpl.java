@@ -4,7 +4,8 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.entity.User;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.mapper.UserMapper;
-import org.springframework.data.jpa.repository.Query;
+import com.example.demo.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,13 +13,10 @@ import java.util.List;
 
 @Component
 public class UserServiceImpl implements UserService{
-    private  static  ArrayList<User> users = new ArrayList<User>();
+    @Autowired
+    private UserRepository userRepository;
 
-//    static {
-//        users.add(new User(1,"Lê Đoàn Anh Quân","quanchinh@gmail.com","0866877618","avatar","123"));
-//        users.add(new User(2,"Lê Đoàn Tuan Vũ","quanchinh@gmail.com","0866877618","avatar","123"));
-//        users.add(new User(3,"Trần Thị Diem Quynh","quanchinh@gmail.com","0866877618","avatar","123"));
-//    }
+    private List<User> users = userRepository.findAll();
 
     @Override
     public List<UserDto> getListUser() {
