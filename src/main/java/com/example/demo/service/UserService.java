@@ -13,4 +13,6 @@ public interface UserService {
     public List<UserDto> searchUser(String keyword);
 
     public User createUser(User user);
+
+    public User updateUser(Long id, User user);
 }

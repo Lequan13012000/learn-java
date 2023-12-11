@@ -60,4 +60,18 @@ public class UserServiceImpl implements UserService{
         }
         return userRepository.save(user);
     }
+
+    @Override
+    public User updateUser(Long id, User user) {
+        User fromDB = userRepository.findById(id).orElse(null);
+        if (fromDB == null) {
+            return null;
+        }
+        fromDB.setEmail(user.getEmail());
+        fromDB.setName(user.getName());
+        fromDB.setPhone(user.getPhone());
+        fromDB.setAvatar(user.getPhone());
+        return userRepository.save(fromDB);
+    }
+
 }
