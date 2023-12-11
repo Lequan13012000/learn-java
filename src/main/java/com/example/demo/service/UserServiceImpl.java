@@ -49,4 +49,15 @@ public class UserServiceImpl implements UserService{
         }
         return result;
     }
+
+    @Override
+    public User createUser(User user) {
+        if (user.getEmail() == null  || user.getEmail().isEmpty()) {
+            return null;
+        }
+        if (user.getName() == null  || user.getName().isEmpty()) {
+            return null;
+        }
+        return userRepository.save(user);
+    }
 }

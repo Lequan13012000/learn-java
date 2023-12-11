@@ -32,8 +32,8 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
     @PostMapping("")
-    public ResponseEntity<?> createUser(){
-        return null;
+    public User createUser(@RequestBody User user){
+        return userService.createUser(user);
     }
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(){

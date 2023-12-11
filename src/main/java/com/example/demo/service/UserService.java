@@ -11,4 +11,6 @@ public interface UserService {
     public UserDto getUserById(int id);
 
     public List<UserDto> searchUser(String keyword);
+
+    public User createUser(User user);
 }

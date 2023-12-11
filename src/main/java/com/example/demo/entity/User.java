@@ -17,21 +17,21 @@ import org.springframework.stereotype.Component;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
-    @Column
+    @Column(name = "name", length = 500)
     private String name;
 
-    @Column
+    @Column(name = "email", length = 500)
     private String email;
 
-    @Column
+    @Column(name = "phone", length = 500)
     private String phone;
 
-    @Column
+    @Column(name = "avatar", length = 500)
     private String avatar;
 
-    @Column
+    @Column(name = "password", length = 500)
     private String password;
 
 }
