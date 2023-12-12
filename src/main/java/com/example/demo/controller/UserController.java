@@ -32,12 +32,12 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
     @PostMapping("")
-    public UserDto createUser(@RequestBody User user){
-        return userService.createUser(user);
+    public ResponseEntity<?> createUser(@RequestBody User user){
+        return ResponseEntity.ok(userService.createUser(user));
     }
     @PutMapping("/{id}")
-    public UserDto updateUser(@PathVariable Long id, @RequestBody User user) {
-        return userService.updateUser(id, user);
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User user) {
+        return ResponseEntity.status(201).body(userService.updateUser(id, user));
     }
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
