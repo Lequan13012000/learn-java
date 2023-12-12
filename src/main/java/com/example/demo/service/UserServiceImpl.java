@@ -51,18 +51,18 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User createUser(User user) {
+    public UserDto createUser(User user) {
         if (user.getEmail() == null  || user.getEmail().isEmpty()) {
             return null;
         }
         if (user.getName() == null  || user.getName().isEmpty()) {
             return null;
         }
-        return userRepository.save(user);
+        return UserMapper.toUserDto(userRepository.save(user));
     }
 
     @Override
-    public User updateUser(Long id, User user) {
+    public UserDto updateUser(Long id, User user) {
         User fromDB = userRepository.findById(id).orElse(null);
         if (fromDB == null) {
             return null;
@@ -71,7 +71,12 @@ public class UserServiceImpl implements UserService{
         fromDB.setName(user.getName());
         fromDB.setPhone(user.getPhone());
         fromDB.setAvatar(user.getPhone());
-        return userRepository.save(fromDB);
+        return UserMapper.toUserDto(userRepository.save(fromDB));
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 
 }

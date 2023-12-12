@@ -32,15 +32,15 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
     @PostMapping("")
-    public User createUser(@RequestBody User user){
+    public UserDto createUser(@RequestBody User user){
         return userService.createUser(user);
     }
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+    public UserDto updateUser(@PathVariable Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(){
-        return null;
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 }
