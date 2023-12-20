@@ -1,12 +1,13 @@
 package com.example.demo.repository;
 
 import com.example.demo.entity.Cate;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CateRepository {
+public interface CateRepository extends JpaRepository<Cate, Long> {
     @Query(value = "SELECT * \n" +
             "FROM cate \n" +
             "WHERE name LIKE %:name% \n" +

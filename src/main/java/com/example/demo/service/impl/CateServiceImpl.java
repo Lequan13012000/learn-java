@@ -6,10 +6,12 @@ import com.example.demo.entity.Cate;
 import com.example.demo.repository.CateRepository;
 import com.example.demo.request.SearchRequest;
 import com.example.demo.response.BaseResponse;
+import com.example.demo.response.CateResponse;
 import com.example.demo.response.PagingResponse;
-import com.example.demo.service.LevelOrganizationService;
+import com.example.demo.service.CateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +19,11 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class LevelOrganizationServiceImpl implements LevelOrganizationService {
+public class CateServiceImpl implements CateService {
     private final CateRepository cateRepository;
+
+    @Value("${KEY_ORGANIZATION_LEVEL}")
+    private String organizationLevel;
 
     @Override
     public BaseResponse<PagingResponse> search(SearchRequest request) {
@@ -28,7 +33,7 @@ public class LevelOrganizationServiceImpl implements LevelOrganizationService {
         }
         int offset = (request.getPage_index() - 1) * request.getPage_size();
         List<Cate> cates = cateRepository.findByNameContainingAndCdSortedByValAndCreatedAt(request.getStr().trim(), organizationLevel, request.getPage_size(), offset);
-        List<LevelOrganizationResponse> response = cates.stream().map(cate -> LevelOrganizationResponse.of(cate.getName(), cate.getVal(), cate.getId())).toList();
+        List<CateResponse> response = cates.stream().map(cate -> CateResponse.of(cate.getName(), cate.getVal(), cate.getId())).toList();
         Long totalRecords = cateRepository.countFindByNameContainingAndCdSortedByValAndCreatedAt(request.getStr().trim(), organizationLevel);
         int totalPages = (int) Math.ceil((double) totalRecords / request.getPage_size());
         PagingDTO pagingResponse = new PagingDTO();
