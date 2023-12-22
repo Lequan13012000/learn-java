@@ -4,6 +4,7 @@ import com.example.demo.constant.CommonMessage;
 import com.example.demo.dto.PagingDTO;
 import com.example.demo.entity.Cate;
 import com.example.demo.repository.CateRepository;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.request.SearchRequest;
 import com.example.demo.response.BaseResponse;
 import com.example.demo.response.CateResponse;
@@ -11,6 +12,7 @@ import com.example.demo.response.PagingResponse;
 import com.example.demo.service.CateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,8 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class CateServiceImpl implements CateService {
-    private final CateRepository cateRepository;
+    @Autowired
+    private CateRepository cateRepository;
 
     @Value("${KEY_ORGANIZATION_LEVEL}")
     private String organizationLevel;
